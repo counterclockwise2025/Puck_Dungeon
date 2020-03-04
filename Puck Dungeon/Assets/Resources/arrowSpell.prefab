@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3845403284639445873}
   - component: {fileID: 3845403284639445878}
   - component: {fileID: 3845403284639445879}
-  - component: {fileID: 3845403284639445876}
   - component: {fileID: 1165749801137079974}
   m_Layer: 0
   m_Name: arrowSpell
@@ -99,21 +98,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.3799999
---- !u!114 &3845403284639445876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3845403284639445877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab997e32c07b418419c6abff6610544d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  players: []
-  isFiring: 1
-  rgbody2D: {fileID: 0}
 --- !u!50 &1165749801137079974
 Rigidbody2D:
   serializedVersion: 4

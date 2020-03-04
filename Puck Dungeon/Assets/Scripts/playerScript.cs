@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class playerScript : MonoBehaviour
 {
 
-    public bool isSelected = false;
-    private bool canShoot = true;
+    public bool isSelected;
+    public bool canShoot = true;
     public bool canSelect;
     public bool isAiming = false;
     Rigidbody2D rgbody2D;
@@ -28,14 +28,14 @@ public class playerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isSelected = false;
         rgbody2D = GetComponent<Rigidbody2D>();
         spriteRen = this.gameObject.transform.Find("puckSprite/characterSprite").GetComponent<SpriteRenderer>();
         gcScript = GameObject.Find("GameController").GetComponent<gameControllerScriptNew>();
         actionUI = GameObject.Find("actionUIHolder");
-        actionUI.SetActive(false);
         playerObjs = GameObject.FindGameObjectsWithTag("Player");
         aimArrow = this.gameObject.transform.Find("puckSprite/Puck_Highlight_Arrow").gameObject;
+        actionUI.SetActive(false);
+        isSelected = false;
     }
 
     // Update is called once per frame
@@ -48,16 +48,23 @@ public class playerScript : MonoBehaviour
 
     private void updateSprite()
     {
-        if(canSelect == false && gcScript.playerTurn == true){
+        //if the player cannot be selected and it is their turn
+        if(canSelect == false){
+            //make the charactersprite grey
             spriteRen.color = Color.grey;
-        }else if(canSelect == true || gcScript.playerTurn == false){
+        //if the player can be selected or it is not their turn
+        }else if(canSelect == true){
             spriteRen.color = Color.white;
         }
     }
 
+    //attempt to select the player
     private void OnMouseDown(){
+        //if the player can be selected
         if(canSelect == true){
+            //and it is the players turn
             if(gcScript.playerTurn == true){
+                //select the player
                 isSelected = true;
             }
         }
@@ -65,13 +72,19 @@ public class playerScript : MonoBehaviour
 
     private void aim()
     {
+        //if the player can be selected
         if(canSelect == true){
+            //and it is the players turn
             if(gcScript.playerTurn == true){
+                //and the player is selected
                 if(isSelected == true)
                 {
+                    //and the player is aiming
                     if(isAiming == true){
+                        //activate the aim arrow
                         aimArrow.SetActive(true);
-                        //rotation
+                        
+                        //rotate the aimarrow towards the mouse
                         Vector3 mousePos = Input.mousePosition;
                         mousePos.z = 5.23f;
 
@@ -82,22 +95,28 @@ public class playerScript : MonoBehaviour
                         float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
                         aimArrow.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
+                        //start checking to see if we have shot every frame
                         checkShoot();
+
+                        //give us the ability to shoot
                         canShoot = true;
+
+                        //if we scroll up & we aren't already at max speed
                         if(Input.mouseScrollDelta.y > 0 && speed < maxSpeed){
+                            //increase our speed by 1
                             speed += 1;
                         }
-                        if(Input.mouseScrollDelta.y < 0 && speed > 0)
+                        //if we scroll down & we aren't already at 1 speed
+                        if(Input.mouseScrollDelta.y < 0 && speed > 1)
                         {
+                            //decrease our speed by 1
                             speed -= 1;
                         }
-                        if(Input.GetMouseButtonDown(1)){
-                            isSelected = false;
-                            canShoot = false;
-                            isAiming = false;
-                        }
                     }
+
+                    //if we right click
                     if(Input.GetMouseButtonDown(1)){
+                            //deselect the player
                             isSelected = false;
                             canShoot = false;
                             isAiming = false;
@@ -106,6 +125,8 @@ public class playerScript : MonoBehaviour
                 else
                 {
                     canShoot = false;
+                    isAiming = false;
+                    isSelected = false;
                     aimArrow.SetActive(false);
                 }
             }
