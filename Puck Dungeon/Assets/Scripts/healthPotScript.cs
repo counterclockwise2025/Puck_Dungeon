@@ -21,14 +21,14 @@ public class healthPotScript : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        Destroy(this.gameObject);
-        if(col.gameObject.tag == "Player"){
-            col.gameObject.GetComponent<playerScript>().addHealth();
-        }
-        if(col.gameObject.tag == "enemy"){
-            col.gameObject.GetComponent<slimeScript>().addHealth();
-        }
-    }
+    // void OnTriggerEnter2D(Collider2D col)
+    // {
+    //     Destroy(this.gameObject);
+    //     if(col.gameObject.tag == "Player"){
+    //         col.gameObject.GetComponent<playerScript>().addHealth();
+    //     }
+    //     if(col.gameObject.tag == "enemy"){
+    //         col.gameObject.GetComponent<slimeScript>().addHealth();
+    //     }
+    // }
 }

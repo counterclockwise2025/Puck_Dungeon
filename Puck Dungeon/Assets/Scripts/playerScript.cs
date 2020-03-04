@@ -23,18 +23,19 @@ public class playerScript : MonoBehaviour
     SpriteRenderer spriteRen;
     public GameObject actionUI;
     public GameObject[] playerObjs;
+    public GameObject aimArrow;
 
     // Start is called before the first frame update
     void Start()
     {
         isSelected = false;
         rgbody2D = GetComponent<Rigidbody2D>();
-        spriteRen = GetComponent<SpriteRenderer>();
+        spriteRen = this.gameObject.transform.Find("puckSprite/characterSprite").GetComponent<SpriteRenderer>();
         gcScript = GameObject.Find("GameController").GetComponent<gameControllerScriptNew>();
-        // eScript = GameObject.Find("slime").GetComponent<slimeScript>();
         actionUI = GameObject.Find("actionUIHolder");
         actionUI.SetActive(false);
         playerObjs = GameObject.FindGameObjectsWithTag("Player");
+        aimArrow = this.gameObject.transform.Find("puckSprite/Puck_Highlight_Arrow").gameObject;
     }
 
     // Update is called once per frame
@@ -47,16 +48,16 @@ public class playerScript : MonoBehaviour
 
     private void updateSprite()
     {
-        if(canSelect == false && gcScript.pOneTurn == true){
+        if(canSelect == false && gcScript.playerTurn == true){
             spriteRen.color = Color.grey;
-        }else if(canSelect == true || gcScript.pOneTurn == false){
+        }else if(canSelect == true || gcScript.playerTurn == false){
             spriteRen.color = Color.white;
         }
     }
 
     private void OnMouseDown(){
         if(canSelect == true){
-            if(gcScript.pOneTurn == true){
+            if(gcScript.playerTurn == true){
                 isSelected = true;
             }
         }
@@ -65,10 +66,11 @@ public class playerScript : MonoBehaviour
     private void aim()
     {
         if(canSelect == true){
-            if(gcScript.pOneTurn == true){
+            if(gcScript.playerTurn == true){
                 if(isSelected == true)
                 {
                     if(isAiming == true){
+                        aimArrow.SetActive(true);
                         //rotation
                         Vector3 mousePos = Input.mousePosition;
                         mousePos.z = 5.23f;
@@ -78,7 +80,7 @@ public class playerScript : MonoBehaviour
                         mousePos.y = mousePos.y - objectPos.y;
 
                         float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
-                        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                        aimArrow.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
                         checkShoot();
                         canShoot = true;
@@ -101,17 +103,10 @@ public class playerScript : MonoBehaviour
                             isAiming = false;
                     }
                 }
-                // if(fireArrow == true)
-                // {
-                //     if(Input.GetMouseButtonDown(0)){
-                //         isSelected = false;
-                //         canShoot = false;
-                //         isAiming = false;
-                //     }
-                // }
                 else
                 {
                     canShoot = false;
+                    aimArrow.SetActive(false);
                 }
             }
         }
@@ -147,11 +142,11 @@ public class playerScript : MonoBehaviour
 
     private void doShoot()
     {
-        rgbody2D.velocity = transform.right * speed;
+        rgbody2D.velocity = aimArrow.transform.right * speed;
         isSelected = false;
         canSelect = false;
-        // actionUI.SetActive(false);
         isAiming = false;
+        aimArrow.SetActive(false);
     }
 
     public void addDmg()
@@ -174,7 +169,7 @@ public class playerScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if(gcScript.pOneTurn == false){
+        if(gcScript.playerTurn == false){
             if(col.gameObject.tag == "enemy")
                 {
                     pHealth -= col.gameObject.GetComponent<damageScript>().damage;

@@ -5,18 +5,15 @@ using UnityEngine.UI;
 
 public class gameControllerScriptNew : MonoBehaviour
 {
-    public bool pOneTurn;
+    public bool playerTurn;
     // public playerScript pScript;
     public GameObject[] playerPucks;
     public GameObject[] enemyPucks;
     public Text buttonTxt;
 
-    public delegate void ClickAction();
-    public static event ClickAction OnClicked;
-
     void Start()
     {
-        pOneTurn = true;
+        playerTurn = true;
         playerPucks = GameObject.FindGameObjectsWithTag("Player");
         enemyPucks = GameObject.FindGameObjectsWithTag("enemy");
     }
@@ -29,21 +26,31 @@ public class gameControllerScriptNew : MonoBehaviour
 
     public void changeTurn()
     {
+        //get all the enemy and player pucks into seperate arrays
         playerPucks = GameObject.FindGameObjectsWithTag("Player");
         enemyPucks = GameObject.FindGameObjectsWithTag("enemy");
-        pOneTurn = !pOneTurn;
-        if(pOneTurn == true)
+
+        //change the turn
+        playerTurn = !playerTurn;
+
+        //if it is the players turn
+        if(playerTurn == true)
         {
+            //change the button to say end turn
             buttonTxt.text = "End Turn";
+
+            //for every player puck in the player puck array
             foreach(GameObject playerPuck in playerPucks)
             {
+                //if they are active
                 if(playerPuck.activeSelf != false)
                 {
+                    //set their can select to true
                     playerPuck.GetComponent<playerScript>().canSelect = true;
                 }
             }
         }
-        if(pOneTurn == false)
+        if(playerTurn == false)
         {
             buttonTxt.text = "Start Turn";
             foreach(GameObject playerPuck in playerPucks)
@@ -53,7 +60,13 @@ public class gameControllerScriptNew : MonoBehaviour
                     playerPuck.GetComponent<playerScript>().canSelect = false;
                 }
             }
-            OnClicked();
+            foreach(GameObject enemyPuck in enemyPucks)
+            {
+                if(enemyPuck.activeSelf != false)
+                {
+                    enemyPuck.SendMessage("beforeTurn", SendMessageOptions.DontRequireReceiver);
+                }
+            }
         }
     }
 }

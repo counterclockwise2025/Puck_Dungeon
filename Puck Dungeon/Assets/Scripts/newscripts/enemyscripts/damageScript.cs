@@ -6,19 +6,18 @@ using UnityEngine.UI;
 public class damageScript : MonoBehaviour
 {
 
-    public float damage = 6;
+    public float damage;
     public Text dmgTxt;
 
     // Start is called before the first frame update
     void Start()
     {
-        dmgTxt = GameObject.Find("dmgTxt").GetComponent<Text>();
+        dmgTxt = this.gameObject.transform.Find("Canvas/dmgTxt").gameObject.GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
         dmgTxt.text = "" + damage;
-
     }
 }

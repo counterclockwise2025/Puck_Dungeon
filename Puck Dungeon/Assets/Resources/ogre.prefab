@@ -209,8 +209,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3993015189957252255}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 32, y: 17, z: -0.01}
-  m_LocalScale: {x: 50, y: 50, z: 100}
+  m_LocalPosition: {x: 7, y: 56, z: -0.01}
+  m_LocalScale: {x: 652.5, y: 652.5, z: 1326.9598}
   m_Children: []
   m_Father: {fileID: 3993015190579039047}
   m_RootOrder: 2
@@ -253,7 +253,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 79617f630e3fa934582e66ce841437c2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b08329910614e204ca75aff82f75868d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 3993015190221244702}
   - component: {fileID: 3993015190221244703}
   - component: {fileID: 3993015190221244705}
-  - component: {fileID: 3993015190221244700}
+  - component: {fileID: 1709566331569319497}
   m_Layer: 0
   m_Name: ogre
   m_TagString: enemy
@@ -294,7 +294,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3993015190221244710}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.69, y: 2.21, z: -1}
   m_LocalScale: {x: 0.27806443, y: 0.27806443, z: 2.7806442}
   m_Children:
@@ -431,7 +431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   dmgTxt: {fileID: 0}
---- !u!114 &3993015190221244700
+--- !u!114 &1709566331569319497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -440,7 +440,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3993015190221244710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a190fac5268997d43a73ed52f899f33e, type: 3}
+  m_Script: {fileID: 11500000, guid: af916422dc7064e41a435bb1174958bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3993015190579039044

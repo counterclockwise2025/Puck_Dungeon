@@ -10,22 +10,20 @@ public class healthScript : MonoBehaviour
     public Text healthTxt;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        health = 20;
-        healthTxt = GameObject.Find("healthTxt").GetComponent<Text>();
-        healthTxt.text = health.ToString();
+    void Awake() {
+        healthTxt = this.gameObject.transform.Find("Canvas/healthTxt").gameObject.GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //set the health UI to the objects health value
+        healthTxt.text = health + "";
     }
 
 
     public void checkHealth()
     {
-        healthTxt.text = health.ToString();
         if(health < 1)
         {
             Destroy(this.gameObject);

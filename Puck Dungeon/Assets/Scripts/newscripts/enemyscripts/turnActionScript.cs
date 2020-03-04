@@ -8,7 +8,6 @@ public class turnActionScript : MonoBehaviour
     Rigidbody2D rgbody2D;
     Transform spawnNode;
     gameControllerScriptNew gcScript;
-    bool isTurn = true;
 
     void Start()
     {
@@ -21,19 +20,6 @@ public class turnActionScript : MonoBehaviour
     {
         
     }
-
-    void OnEnable()
-    {
-        gameControllerScriptNew.OnClicked += beforeTurn;
-        Debug.Log("enabled");
-    }
-
-    void OnDisable()
-    {
-        gameControllerScriptNew.OnClicked -= beforeTurn;
-        Debug.Log("disabled");
-    }
-
 
     void beforeTurn()
     {

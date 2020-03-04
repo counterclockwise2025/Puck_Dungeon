@@ -25,10 +25,10 @@ public class collisionScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if(gcScript.pOneTurn == true){
+        if(gcScript.playerTurn == true){
             if(col.gameObject.tag == "Player")
                 {
-                    hScript.health -= col.gameObject.GetComponent<playerScript>().pDamage;
+                    hScript.health = hScript.health - col.gameObject.GetComponent<playerScript>().pDamage;
                     hScript.checkHealth();
                 }
         }

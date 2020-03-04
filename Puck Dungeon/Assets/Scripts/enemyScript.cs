@@ -39,15 +39,15 @@ public class enemyScript : MonoBehaviour
 
     private void updateSprite()
     {
-        if(canSelect == false && gcScript.pOneTurn == false){
+        if(canSelect == false && gcScript.playerTurn == false){
             spriteRen.color = Color.grey;
-        }else if(canSelect == true || gcScript.pOneTurn == true){
+        }else if(canSelect == true || gcScript.playerTurn == true){
             spriteRen.color = Color.white;
         }
     }
 
     private void OnMouseDown(){
-        if(gcScript.pOneTurn == false){
+        if(gcScript.playerTurn == false){
             isSelected = true;
         }
     }
@@ -60,7 +60,7 @@ public class enemyScript : MonoBehaviour
     private void aim()
     {
         if(canSelect == true){
-            if(gcScript.pOneTurn == false){
+            if(gcScript.playerTurn == false){
             if(isSelected == true)
             {
                 //rotation
@@ -126,7 +126,7 @@ public class enemyScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if(gcScript.pOneTurn == true){
+        if(gcScript.playerTurn == true){
             if(col.gameObject.tag == "Player")
                 {
                     eHealth -= pScript.pDamage;

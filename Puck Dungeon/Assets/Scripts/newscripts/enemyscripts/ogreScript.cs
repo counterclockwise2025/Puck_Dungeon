@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class slimeScript : MonoBehaviour
+public class ogreScript : MonoBehaviour
 {
     Rigidbody2D rgbody2D;
+    Transform spawnNode;
     gameControllerScriptNew gcScript;
 
     void Start()
     {
         rgbody2D = GetComponent<Rigidbody2D>();
+        spawnNode = this.gameObject.transform.Find("spawnNode").gameObject.GetComponent<Transform>();
         gcScript = GameObject.Find("GameController").GetComponent<gameControllerScriptNew>();
     }
 
@@ -33,6 +34,9 @@ public class slimeScript : MonoBehaviour
 
     public void afterTurn()
     {
-        
+        if(this.gameObject.activeSelf == true){
+            Object newSlime = Instantiate(Resources.Load("slime"), spawnNode.position, spawnNode.rotation);
+            newSlime.name = "slime";
+        }   
     }
 }
