@@ -16,6 +16,7 @@ public class playerScript : MonoBehaviour
     public Text txtPSpeed;
     public float pHealth = 10;
     public float pDamage = 5;
+    public float pMana = 10;
     public float speed = 10;
     public float maxSpeed = 15;
     public gameControllerScriptNew gcScript;
@@ -77,8 +78,7 @@ public class playerScript : MonoBehaviour
             //and it is the players turn
             if(gcScript.playerTurn == true){
                 //and the player is selected
-                if(isSelected == true)
-                {
+                if(isSelected == true){
                     //and the player is aiming
                     if(isAiming == true){
                         //activate the aim arrow
@@ -180,10 +180,10 @@ public class playerScript : MonoBehaviour
     {
         if(gcScript.playerTurn == false){
             if(col.gameObject.tag == "enemy")
-                {
-                    pHealth -= col.gameObject.GetComponent<damageScript>().damage;
-                    checkHealth();
-                }
+            {
+                pHealth -= col.gameObject.GetComponent<damageScript>().damage;
+                checkHealth();
+            }
         }
     }
 }

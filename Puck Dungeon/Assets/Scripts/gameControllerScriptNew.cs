@@ -33,6 +33,11 @@ public class gameControllerScriptNew : MonoBehaviour
         //change the turn
         playerTurn = !playerTurn;
 
+        if(enemyPucks.Length == 0)
+        {
+            Debug.Log("Player Wins");
+        }
+
         //if it is the players turn
         if(playerTurn == true)
         {

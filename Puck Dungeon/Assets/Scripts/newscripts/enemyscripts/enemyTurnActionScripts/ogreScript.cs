@@ -28,7 +28,7 @@ public class ogreScript : MonoBehaviour
     public void onTurn()
     {
         float randNum = Random.Range(0.0f,1.0f);
-        if(randNum >= .5){
+        if(randNum > .5){
             rgbody2D.velocity = new Vector2(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));
         }
         else{
