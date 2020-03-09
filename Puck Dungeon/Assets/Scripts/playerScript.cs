@@ -33,7 +33,7 @@ public class playerScript : MonoBehaviour
         gcScript = GameObject.Find("GameController").GetComponent<gameControllerScriptNew>();
         actionUI = GameObject.Find("actionUIHolder");
         playerObjs = GameObject.FindGameObjectsWithTag("Player");
-        aimArrow = this.gameObject.transform.Find("puckSprite/Puck_Highlight_Arrow").gameObject;
+        aimArrow = this.gameObject.transform.Find("puckSprite/aimArrow").gameObject;
         actionUI.SetActive(false);
         isSelected = false;
     }
@@ -100,18 +100,6 @@ public class playerScript : MonoBehaviour
 
                         //give us the ability to shoot
                         canShoot = true;
-
-                        //if we scroll up & we aren't already at max speed
-                        if(Input.mouseScrollDelta.y > 0 && speed < maxSpeed){
-                            //increase our speed by 1
-                            speed += 1;
-                        }
-                        //if we scroll down & we aren't already at 1 speed
-                        if(Input.mouseScrollDelta.y < 0 && speed > 1)
-                        {
-                            //decrease our speed by 1
-                            speed -= 1;
-                        }
                     }
 
                     //if we right click

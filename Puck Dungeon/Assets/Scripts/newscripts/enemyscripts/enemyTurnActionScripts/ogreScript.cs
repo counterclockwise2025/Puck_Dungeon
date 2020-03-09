@@ -27,16 +27,18 @@ public class ogreScript : MonoBehaviour
 
     public void onTurn()
     {
-        rgbody2D.velocity = new Vector2(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));
-
-        afterTurn();
+        float randNum = Random.Range(0.0f,1.0f);
+        if(randNum >= .5){
+            rgbody2D.velocity = new Vector2(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));
+        }
+        else{
+            Object newSlime = Instantiate(Resources.Load("slime"), spawnNode.position, spawnNode.rotation);
+            newSlime.name = "slime";
+        }
     }
 
     public void afterTurn()
     {
-        if(this.gameObject.activeSelf == true){
-            Object newSlime = Instantiate(Resources.Load("slime"), spawnNode.position, spawnNode.rotation);
-            newSlime.name = "slime";
-        }   
+            
     }
 }

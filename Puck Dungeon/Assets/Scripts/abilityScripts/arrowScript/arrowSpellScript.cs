@@ -7,19 +7,25 @@ public class arrowSpellScript : MonoBehaviour
     public bool canPlace;
     public bool canFireArrow;
     public GameObject aimArrow;
+    public GameObject aimArrowNode;
     public GameObject arrowPuckPrefab;
     playerScript pScript;
     gameControllerScriptNew gcScript;
 
-    private void Start() 
+    private void Awake() 
     {
         canFireArrow = false;
         canPlace = false;
         pScript = GetComponent<playerScript>();
         gcScript = GameObject.Find("GameController").GetComponent<gameControllerScriptNew>();
+        aimArrow = GameObject.Find("playerPuck/puckSprite/aimArrow");
+        aimArrowNode = GameObject.Find("playerPuck/puckSprite/aimArrow/spawnNode");
     }
 
     private void Update() {
+        if(Input.GetKeyDown("space")){
+            Debug.Log(pScript.pHealth);
+        }
         if(pScript.canSelect == true){
             //and it is the players turn
             if(gcScript.playerTurn == true){
@@ -67,11 +73,20 @@ public class arrowSpellScript : MonoBehaviour
     {
         if(canFireArrow == true){
             if(Input.GetMouseButtonDown(0)){
-                GameObject arrowPuck = Instantiate(arrowPuckPrefab, new Vector3(aimArrow.transform.position.x + 1,aimArrow.transform.position.y, -2), aimArrow.transform.rotation);
+                GameObject arrowPuck = Instantiate(arrowPuckPrefab, new Vector3(aimArrowNode.transform.position.x, aimArrowNode.transform.position.y, -2), aimArrow.transform.rotation);
                 Rigidbody2D arrowPuckRigidBody = arrowPuck.GetComponent<Rigidbody2D>();
                 arrowPuckRigidBody.velocity = arrowPuck.transform.right * 10;
+                afterShot();
             }
         }
+    }
+
+    public void afterShot()
+    {
+        canPlace = false;
+        pScript.isSelected = false;
+        pScript.canShoot = false;
+        canFireArrow = false;
     }
         
 }
