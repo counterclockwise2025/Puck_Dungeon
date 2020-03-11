@@ -13,7 +13,6 @@ public abstract class spellsAbstract : MonoBehaviour
         public Spell(GameObject arrow, int[] stat)
         {
             Arrow = arrow;
-            int[] stat;
         }
     }
 
