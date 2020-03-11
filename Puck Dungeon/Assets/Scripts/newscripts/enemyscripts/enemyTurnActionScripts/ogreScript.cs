@@ -37,8 +37,11 @@ public class ogreScript : MonoBehaviour
 
     public void onTurn()
     {
+        //raycasting and AI
         float randNum = Random.Range(0.0f,1.0f);
         if(randNum > .5){
+            //currently giving a random x,y
+            //need to change to look for player rigidbody and send in that direction
             rgbody2D.velocity = new Vector2(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));
         }
         else{
