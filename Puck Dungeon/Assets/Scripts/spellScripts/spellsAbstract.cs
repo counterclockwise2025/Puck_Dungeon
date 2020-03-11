@@ -8,31 +8,31 @@ public abstract class spellsAbstract : MonoBehaviour
     //initialize varibles for the the definition of a spell
     public class Spell
     {
-        int spellShoot;
-        int spellCount;
-
+        GameObject Arrow;
         //create a constructor for the the object/attributes of the class 
-        public Spell(int shoot, int count)
+        public Spell(GameObject arrow, int[] stat)
         {
-            spellShoot = shoot;
-            spellCount = count;
+            Arrow = arrow;
+            int[] stat;
         }
     }
 
-    //initialize variables and create a new spell object
-    public Spell playerSpell = new Spell(5,5);
     public GameObject arrowPuckPrefab;
     playerScript pScript;
+    gameControllerScriptNew gcScript;
 
-    // Start is called before the first frame update
-    void Start()
+    public void statEffect()
     {
-        
+        //apply different effects pretaining to the the character type and class
     }
 
-    // Update is called once per frame
-    void Update()
+    public void appStatEff()
     {
-        
+        //define how status effect is going to be applied
+    }
+
+    public void remStatEff()
+    {
+        //define how status effect is going to be removed
     }
 }
