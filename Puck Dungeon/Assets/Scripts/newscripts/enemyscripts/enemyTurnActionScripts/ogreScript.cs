@@ -7,21 +7,31 @@ public class ogreScript : MonoBehaviour
     Rigidbody2D rgbody2D;
     Transform spawnNode;
     gameControllerScriptNew gcScript;
-
+    public bool doingTurn;
+    public float awayTime;
     void Start()
     {
         rgbody2D = GetComponent<Rigidbody2D>();
         spawnNode = this.gameObject.transform.Find("spawnNode").gameObject.GetComponent<Transform>();
         gcScript = GameObject.Find("GameController").GetComponent<gameControllerScriptNew>();
+        awayTime = 1f;
     }
 
     void Update()
     {
-        
+        if(gcScript.playerTurn != true){
+            if(rgbody2D.velocity.x < Mathf.Abs(.1f) && rgbody2D.velocity.y < Mathf.Abs(.1f)){
+                awayTime -= Time.deltaTime;
+            }
+            if(awayTime < 0){
+                gcScript.endEnemyAction();
+            }
+        }
     }
 
     void beforeTurn()
     {
+        awayTime = 1f;
         onTurn();
     }
 

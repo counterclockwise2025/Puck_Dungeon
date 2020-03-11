@@ -10,18 +10,40 @@ public class gameControllerScriptNew : MonoBehaviour
     public GameObject[] playerPucks;
     public GameObject[] enemyPucks;
     public Text buttonTxt;
+    int enemyActions;
+    int actionsEnded;
+    int enemyPuckIndex;
 
     void Start()
     {
         playerTurn = true;
         playerPucks = GameObject.FindGameObjectsWithTag("Player");
         enemyPucks = GameObject.FindGameObjectsWithTag("enemy");
+        enemyPuckIndex = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public void endEnemyAction()
+    {
+        enemyPucks = GameObject.FindGameObjectsWithTag("enemy");
+        int enemyActions = enemyPucks.Length;
+        actionsEnded++;
+        enemyPuckIndex++;
+        if(enemyPuckIndex < enemyPucks.Length){
+            enemyStart();
+        }
+        Debug.Log(enemyPuckIndex);
+
+        if(actionsEnded >= enemyActions){
+            changeTurn();
+            actionsEnded = 0;
+            enemyPuckIndex = 0;
+        }
     }
 
     public void changeTurn()
@@ -65,13 +87,15 @@ public class gameControllerScriptNew : MonoBehaviour
                     playerPuck.GetComponent<playerScript>().canSelect = false;
                 }
             }
-            foreach(GameObject enemyPuck in enemyPucks)
-            {
-                if(enemyPuck.activeSelf != false)
-                {
-                    enemyPuck.SendMessage("beforeTurn", SendMessageOptions.DontRequireReceiver);
-                }
-            }
+            enemyPuckIndex = 0;
+            enemyPucks[0].SendMessage("beforeTurn", SendMessageOptions.DontRequireReceiver);
+        }
+    }
+
+    public void enemyStart()
+    {
+        if(actionsEnded >= enemyActions){
+            enemyPucks[enemyPuckIndex].SendMessage("beforeTurn", SendMessageOptions.DontRequireReceiver);
         }
     }
 }
