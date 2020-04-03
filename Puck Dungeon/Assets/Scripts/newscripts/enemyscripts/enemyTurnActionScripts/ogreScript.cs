@@ -9,12 +9,15 @@ public class ogreScript : MonoBehaviour
     gameControllerScriptNew gcScript;
     public bool doingTurn;
     public float awayTime;
+    healthScript hScript;
+
     void Start()
     {
         rgbody2D = GetComponent<Rigidbody2D>();
         spawnNode = this.gameObject.transform.Find("spawnNode").gameObject.GetComponent<Transform>();
         gcScript = GameObject.Find("GameController").GetComponent<gameControllerScriptNew>();
         awayTime = 1f;
+        hScript = this.gameObject.GetComponent<healthScript>();
     }
 
     void Update()
@@ -26,6 +29,10 @@ public class ogreScript : MonoBehaviour
             if(awayTime < 0){
                 gcScript.endEnemyAction();
             }
+        }
+        if(hScript.health < 1)
+        {
+            doDeath();
         }
     }
 
@@ -53,5 +60,9 @@ public class ogreScript : MonoBehaviour
     public void afterTurn()
     {
             
+    }
+
+    public void doDeath(){
+        Debug.Log("death");
     }
 }

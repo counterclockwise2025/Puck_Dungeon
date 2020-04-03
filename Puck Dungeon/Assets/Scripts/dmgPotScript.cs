@@ -19,14 +19,14 @@ public class dmgPotScript : MonoBehaviour
         
     }
 
-    // void OnTriggerEnter2D(Collider2D col)
-    // {
-    //     Destroy(this.gameObject);
-    //     if(col.gameObject.tag == "Player"){
-    //         col.gameObject.GetComponent<playerScript>().addDmg();
-    //     }
-    //     if(col.gameObject.tag == "enemy"){
-    //         col.gameObject.GetComponent<slimeScript>().addDmg();
-    //     }
-    // }
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Player"){
+            Destroy(this.gameObject);
+            col.gameObject.GetComponent<playerScript>().addDmg();
+        }
+        if(col.gameObject.tag == "enemy"){
+            // col.gameObject.GetComponent<slimeScript>().addDmg();
+        }
+    }
 }

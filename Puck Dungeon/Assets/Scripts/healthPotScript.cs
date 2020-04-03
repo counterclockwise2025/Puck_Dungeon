@@ -11,8 +11,7 @@ public class healthPotScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pOne = GameObject.Find("player").GetComponent<playerScript>();
-        enemy = GameObject.Find("enemy").GetComponent<slimeScript>();
+
     }
 
     // Update is called once per frame
@@ -23,12 +22,17 @@ public class healthPotScript : MonoBehaviour
 
     // void OnTriggerEnter2D(Collider2D col)
     // {
-    //     Destroy(this.gameObject);
-    //     if(col.gameObject.tag == "Player"){
-    //         col.gameObject.GetComponent<playerScript>().addHealth();
-    //     }
-    //     if(col.gameObject.tag == "enemy"){
-    //         col.gameObject.GetComponent<slimeScript>().addHealth();
-    //     }
+        
     // }
+
+    void OnCollisionEnter2D(Collision2D col) {
+        if(col.gameObject.tag == "Player"){
+            Destroy(this.gameObject);
+            col.gameObject.GetComponent<playerScript>().addHealth();
+        }
+        if(col.gameObject.tag == "enemy"){
+            Destroy(this.gameObject);
+            // col.gameObject.GetComponent<slimeScript>().addHealth();
+        }
+    }
 }
