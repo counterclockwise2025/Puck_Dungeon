@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class gameControllerScriptNew : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class gameControllerScriptNew : MonoBehaviour
     int enemyActions;
     int actionsEnded;
     int enemyPuckIndex;
+    public bool noEnemy;
 
     void Start()
     {
@@ -25,7 +27,11 @@ public class gameControllerScriptNew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(enemyPucks.Length < 1){
+            noEnemy = true;
+        }else{
+            noEnemy = false;
+        }
     }
 
     public void endEnemyAction()
@@ -58,6 +64,7 @@ public class gameControllerScriptNew : MonoBehaviour
         if(enemyPucks.Length == 0)
         {
             Debug.Log("Player Wins");
+            SceneManager.LoadScene("level1");
         }
 
         //if it is the players turn
@@ -96,6 +103,14 @@ public class gameControllerScriptNew : MonoBehaviour
     {
         if(actionsEnded >= enemyActions){
             enemyPucks[enemyPuckIndex].SendMessage("beforeTurn", SendMessageOptions.DontRequireReceiver);
+        }
+    }
+
+    public void newLevel()
+    {
+        if(noEnemy == true)
+        {
+            Debug.Log("nextLevel");
         }
     }
 }

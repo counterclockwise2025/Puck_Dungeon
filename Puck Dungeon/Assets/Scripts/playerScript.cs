@@ -25,6 +25,7 @@ public class playerScript : MonoBehaviour
     public GameObject actionUI;
     public GameObject[] playerObjs;
     public GameObject aimArrow;
+    ParticleSystem colParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,7 @@ public class playerScript : MonoBehaviour
         aimArrow = this.gameObject.transform.Find("puckSprite/aimArrow").gameObject;
         actionUI.SetActive(false);
         isSelected = false;
+        colParticles = GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -178,6 +180,7 @@ public class playerScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
+        colParticles.Play();
         if(gcScript.playerTurn == false){
             if(col.gameObject.tag == "enemy")
             {
@@ -185,5 +188,14 @@ public class playerScript : MonoBehaviour
                 checkHealth();
             }
         }
+        if(col.gameObject.tag == "enemy")
+        {
+            Time.timeScale = .1f;
+            Invoke("timeReset", .02f);
+        }
+    }
+
+    void timeReset(){
+        Time.timeScale = 1f;
     }
 }
