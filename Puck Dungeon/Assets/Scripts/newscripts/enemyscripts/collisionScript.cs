@@ -34,3 +34,5 @@ public class collisionScript : MonoBehaviour
         }
     }
 }
+
+//work on raycasting and enemy AI
