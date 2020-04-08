@@ -6,6 +6,8 @@ public class collisionScript : MonoBehaviour
 {
     public gameControllerScriptNew gcScript;
     public healthScript hScript;
+    private bool checkPlayerPos;
+    public float sphereRadius;
     Rigidbody2D rgbody2D;
 
 
@@ -18,9 +20,23 @@ public class collisionScript : MonoBehaviour
     }
 
     // Update is called once per frame
+    //do not know if this is correctly written still working on this to improve the code itself
     void Update()
     {
-        
+        RaycastHit hit;
+        //do not know if the vector 3 to check direction is correct
+        Ray enemyRay = new Ray(transform.position, Vector3.left.right.front.back);
+
+        if(!checkPlayerPos)
+        {
+            if(Physics.Raycast(enemyRay, out hit, Player))
+            {
+                if(hit.collider.tag == "Player")
+                {
+                    OnCollisionEnter2D();
+                }
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -35,4 +51,3 @@ public class collisionScript : MonoBehaviour
     }
 }
 
-//work on raycasting and enemy AI
