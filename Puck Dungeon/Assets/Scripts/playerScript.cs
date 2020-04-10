@@ -188,10 +188,22 @@ public class playerScript : MonoBehaviour
                 checkHealth();
             }
         }
-        if(col.gameObject.tag == "enemy")
+        if(col.gameObject.tag == "enemy" && this.gameObject.activeSelf == true)
         {
             Time.timeScale = .1f;
             Invoke("timeReset", .02f);
+        }
+    }
+
+    public void IncreaseSpeed(){
+        if(speed < maxSpeed){
+            speed++;
+        }
+    }
+
+    public void DecreaseSpeed(){
+        if(speed > 0){
+            speed--;
         }
     }
 

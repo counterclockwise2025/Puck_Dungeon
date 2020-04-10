@@ -11,6 +11,7 @@ public class gameControllerScriptNew : MonoBehaviour
     public GameObject[] playerPucks;
     public GameObject[] enemyPucks;
     public Text buttonTxt;
+    public GameObject turnBtn;
     int enemyActions;
     int actionsEnded;
     int enemyPuckIndex;
@@ -71,7 +72,8 @@ public class gameControllerScriptNew : MonoBehaviour
         if(playerTurn == true)
         {
             //change the button to say end turn
-            buttonTxt.text = "End Turn";
+            // buttonTxt.text = "End Turn";
+            turnBtn.SetActive(true);
 
             //for every player puck in the player puck array
             foreach(GameObject playerPuck in playerPucks)
@@ -86,7 +88,8 @@ public class gameControllerScriptNew : MonoBehaviour
         }
         if(playerTurn == false)
         {
-            buttonTxt.text = "Start Turn";
+            // buttonTxt.text = "Start Turn";
+            turnBtn.SetActive(false);
             foreach(GameObject playerPuck in playerPucks)
             {
                 if(playerPuck.activeSelf != false)
