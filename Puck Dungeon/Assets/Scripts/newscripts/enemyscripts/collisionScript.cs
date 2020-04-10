@@ -27,7 +27,7 @@ public class collisionScript : MonoBehaviour
         //do not know if the vector 3 to check direction is correct
         Ray enemyRay = new Ray(transform.position, Vector3.left.right.front.back);
 
-        if(!checkPlayerPos)
+        if(checkPlayerPos)
         {
             if(Physics.Raycast(enemyRay, out hit, Player))
             {
