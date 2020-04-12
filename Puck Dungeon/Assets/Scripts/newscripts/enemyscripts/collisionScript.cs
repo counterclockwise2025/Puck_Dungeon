@@ -27,6 +27,7 @@ public class collisionScript : MonoBehaviour
         // //do not know if the vector 3 to check direction is correct
         // Ray enemyRay = new Ray(transform.position, Vector2.left);
 
+// <<<<<<< HEAD
         // if(!checkPlayerPos)
         // {
         //     if(Physics.Raycast(enemyRay, out hit, Player))
@@ -39,7 +40,19 @@ public class collisionScript : MonoBehaviour
         //         }
         //     }
         // }
-    }
+// =======
+//         if(checkPlayerPos)
+//         {
+//             if(Physics.Raycast(enemyRay, out hit, Player))
+//             {
+//                 if(hit.collider.tag == "Player")
+//                 {
+//                     OnCollisionEnter2D();
+//                 }
+//             }
+//         }
+// >>>>>>> 37ce5f3f4647771dc583dec73565224edee29837
+//     }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
