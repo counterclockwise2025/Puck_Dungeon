@@ -14,16 +14,16 @@ public class cameraScript : MonoBehaviour
     void Update()
     {
         if(Input.GetKey("w") && Camera.main.transform.position.y < 4.5f){
-            Camera.main.transform.Translate(0,.1f,0);
+            Camera.main.transform.Translate(0,.06f,0);
         }
         if(Input.GetKey("s") && Camera.main.transform.position.y > -4.5f){
-            Camera.main.transform.Translate(0,-.1f,0);
+            Camera.main.transform.Translate(0,-.06f,0);
         }
         if(Input.GetKey("a") && Camera.main.transform.position.x > -9f){
-            Camera.main.transform.Translate(-.1f,0,0);
+            Camera.main.transform.Translate(-.06f,0,0);
         }
         if(Input.GetKey("d") && Camera.main.transform.position.x < 9f){
-            Camera.main.transform.Translate(.1f,0,0);
+            Camera.main.transform.Translate(.06f,0,0);
         }
 
 

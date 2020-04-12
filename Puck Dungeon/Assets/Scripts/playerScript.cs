@@ -10,22 +10,34 @@ public class playerScript : MonoBehaviour
     public bool canShoot = true;
     public bool canSelect;
     public bool isAiming = false;
+
+
     Rigidbody2D rgbody2D;
+    SpriteRenderer spriteRen;
+    ParticleSystem colParticles;
+
+
     public Text txtPHealth;
     public Text txtPDamage;
     public Text txtPSpeed;
+    public Text txtMoveManaCost;
+
     public float pHealth = 10;
     public float pDamage = 5;
+    public float baseMana = 10;
     public float pMana = 10;
+    public float baseSpeed = 8;
     public float speed = 10;
     public float maxSpeed = 15;
+    public float startMana = 10;
+    public float baseMoveCost = 5;
+    public float totalMoveCost;
+
     public gameControllerScriptNew gcScript;
-    // public slimeScript eScript;
-    SpriteRenderer spriteRen;
+
     public GameObject actionUI;
     public GameObject[] playerObjs;
     public GameObject aimArrow;
-    ParticleSystem colParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +59,10 @@ public class playerScript : MonoBehaviour
         aim();
         updateUI();
         updateSprite();
+        moveCost();
     }
+
+    
 
     private void updateSprite()
     {
@@ -125,7 +140,9 @@ public class playerScript : MonoBehaviour
     }
 
     public void doAim(){
-        isAiming = true;
+        if(pMana >= totalMoveCost){
+            isAiming = true;
+        }
     }
 
 
@@ -133,6 +150,7 @@ public class playerScript : MonoBehaviour
         txtPHealth.text = "" + pHealth;
         txtPDamage.text = "" + pDamage;
         txtPSpeed.text = "" + speed;
+        txtMoveManaCost.text = "" + totalMoveCost;
         if(isSelected == true && isAiming == false)
         {
             actionUI.SetActive(true);
@@ -140,6 +158,19 @@ public class playerScript : MonoBehaviour
         if(isSelected == false || isAiming == true)
         {
             actionUI.SetActive(false);
+        }
+        if(totalMoveCost > pMana){
+            txtMoveManaCost.color = Color.red;
+        }else{
+            txtMoveManaCost.color = Color.black;
+        }
+    }
+
+    private void moveCost(){
+        if(speed < baseSpeed){
+            totalMoveCost = 5;
+        }else{
+            totalMoveCost = baseMoveCost + (speed - baseSpeed);
         }
     }
 
@@ -155,9 +186,12 @@ public class playerScript : MonoBehaviour
     {
         rgbody2D.velocity = aimArrow.transform.right * speed;
         isSelected = false;
-        canSelect = false;
         isAiming = false;
+        pMana -= totalMoveCost;
         aimArrow.SetActive(false);
+        if(pMana < 1){
+            canSelect = false;
+        }
     }
 
     public void addDmg()
@@ -188,11 +222,11 @@ public class playerScript : MonoBehaviour
                 checkHealth();
             }
         }
-        if(col.gameObject.tag == "enemy" && this.gameObject.activeSelf == true)
-        {
-            Time.timeScale = .1f;
-            Invoke("timeReset", .02f);
-        }
+        // if(col.gameObject.tag == "enemy" && this.gameObject.activeSelf == true)
+        // {
+        //     Time.timeScale = .1f;
+        //     Invoke("timeReset", .02f);
+        // }
     }
 
     public void IncreaseSpeed(){
@@ -207,7 +241,7 @@ public class playerScript : MonoBehaviour
         }
     }
 
-    void timeReset(){
-        Time.timeScale = 1f;
-    }
+    // void timeReset(){
+    //     Time.timeScale = 1f;
+    // }
 }

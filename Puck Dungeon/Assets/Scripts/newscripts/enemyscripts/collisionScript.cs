@@ -20,23 +20,25 @@ public class collisionScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    //do not know if this is correctly written still working on this to improve the code itself
+    // do not know if this is correctly written still working on this to improve the code itself
     void Update()
     {
-        RaycastHit hit;
-        //do not know if the vector 3 to check direction is correct
-        Ray enemyRay = new Ray(transform.position, Vector3.left.right.front.back);
+        // RaycastHit hit;
+        // //do not know if the vector 3 to check direction is correct
+        // Ray enemyRay = new Ray(transform.position, Vector2.left);
 
-        if(!checkPlayerPos)
-        {
-            if(Physics.Raycast(enemyRay, out hit, Player))
-            {
-                if(hit.collider.tag == "Player")
-                {
-                    OnCollisionEnter2D();
-                }
-            }
-        }
+        // if(!checkPlayerPos)
+        // {
+        //     if(Physics.Raycast(enemyRay, out hit, Player))
+        //     {
+        //         if(hit.collider.tag == "Player")
+        //         {
+        //             Vector2 targetDir;
+        //             targetDir = this.gameObject.transform.position - hit.collider.gameObject.transform;
+        //             rgbody2D.velocity = targetDir;
+        //         }
+        //     }
+        // }
     }
 
     private void OnCollisionEnter2D(Collision2D col)

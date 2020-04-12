@@ -18,5 +18,11 @@ public class speedUIScript : MonoBehaviour
     void Update()
     {
         speedTxt.text = "Speed: " + pScript.speed;
+        if(pScript.speed == pScript.baseSpeed){
+            speedTxt.color = Color.green;
+        }
+        else{
+            speedTxt.color = Color.black;
+        }
     }
 }
