@@ -18,8 +18,8 @@ public class arrowSpellScript : MonoBehaviour
         canPlace = false;
         pScript = GetComponent<playerScript>();
         gcScript = GameObject.Find("GameController").GetComponent<gameControllerScriptNew>();
-        aimArrow = GameObject.Find("playerPuck/puckSprite/aimArrow");
-        aimArrowNode = GameObject.Find("playerPuck/puckSprite/aimArrow/spawnNode");
+        // aimArrow = GameObject.Find("playerPuck/puckSprite/aimArrow");
+        // aimArrowNode = GameObject.Find("playerPuck/puckSprite/aimArrow/spawnNode");
     }
 
     private void Update() {

@@ -20,7 +20,7 @@ public class collisionScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    //do not know if this is correctly written still working on this to improve the code itself
+    // do not know if this is correctly written still working on this to improve the code itself
     void Update()
     {
         RaycastHit hit;

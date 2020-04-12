@@ -83,6 +83,7 @@ public class gameControllerScriptNew : MonoBehaviour
                 {
                     //set their can select to true
                     playerPuck.GetComponent<playerScript>().canSelect = true;
+                    playerPuck.GetComponent<playerScript>().pMana = playerPuck.GetComponent<playerScript>().baseMana;
                 }
             }
         }
