@@ -6,7 +6,7 @@ public class collisionScript : MonoBehaviour
 {
     public gameControllerScriptNew gcScript;
     public healthScript hScript;
-    private bool checkPlayerPos;
+    private bool checkPlayerPos = true;
     public float sphereRadius;
     Rigidbody2D rgbody2D;
 
@@ -23,14 +23,14 @@ public class collisionScript : MonoBehaviour
     // do not know if this is correctly written still working on this to improve the code itself
     void Update()
     {
-        RaycastHit hit;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.left);
+        Debug.DrawRay(transform.position, Vector2.left, Color.green);
         //do not know if the vector 3 to check direction is correct
-        Ray enemyRay = new Ray(transform.position, Vector2.left.right.up.down);
+        //Ray enemyRay = new Ray(transform.position, Vector2.left);
 
         if(checkPlayerPos)
         {
-            if(Physics.Raycast(enemyRay, out hit, Player))
-            {
+            //if(Physics.Raycast(enemyRay, out hit))
                 if(hit.collider.tag == "Player")
                 {
                     //OnCollisionEnter2D();
@@ -39,7 +39,6 @@ public class collisionScript : MonoBehaviour
                     targetdir = this.gameObject.transform.position - hit.collider.gameObject.transform.position; 
                     rgbody2D.velocity = targetdir;
                 }
-            }
         }
     }
 
