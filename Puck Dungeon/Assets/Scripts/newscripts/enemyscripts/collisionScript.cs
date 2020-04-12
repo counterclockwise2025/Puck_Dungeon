@@ -25,7 +25,7 @@ public class collisionScript : MonoBehaviour
     {
         RaycastHit hit;
         //do not know if the vector 3 to check direction is correct
-        Ray enemyRay = new Ray(transform.position, Vector3.left.right.front.back);
+        Ray enemyRay = new Ray(transform.position, Vector2.left.right.up.down);
 
         if(checkPlayerPos)
         {
@@ -33,7 +33,11 @@ public class collisionScript : MonoBehaviour
             {
                 if(hit.collider.tag == "Player")
                 {
-                    OnCollisionEnter2D();
+                    //OnCollisionEnter2D();
+                    //set velocity towards point
+                    Vector2 targetdir;
+                    targetdir = this.gameObject.transform.position - hit.collider.gameObject.transform.position; 
+                    rgbody2D.velocity = targetdir;
                 }
             }
         }
